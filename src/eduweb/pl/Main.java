@@ -3,11 +3,22 @@ package eduweb.pl;
 public class Main {
 
     public static void main(String[] args) {
-        printLetters();
-        printBoard();
+
+        char[][] board = new char[10][10];
+        fillBoard(board);
+        printLetters(board);
+        printBoard(board);
     }
 
-    static void printLetters() {
+    private static void fillBoard(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = getRandomShip(Math.random());
+            }
+        }
+    }
+
+    static void printLetters(char[][] board) {
         System.out.print("  ");
         for (int i = 0; i < 10; i++) {
             System.out.print((char) ('A' + i));
@@ -16,14 +27,14 @@ public class Main {
         System.out.print('\n');
     }
 
-    static void  printBoard() {
-        for (int i = 1; i <= 10; i++) {
-            if(i < 10)
+    static void  printBoard(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            if(i + 1 < 10)
                 System.out.print(' ');
-            System.out.print(i);
+                System.out.print(i + 1);
 
-            for (int j = 0; j < 10; j++) {
-                char shipValue = getRandomShip(Math.random());
+            for (int j = 0; j < board[i].length; j++) {
+                char shipValue = board[i][j];
                 System.out.print(shipValue);
             }
             System.out.print('\n');
